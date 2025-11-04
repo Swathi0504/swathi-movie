@@ -14,6 +14,7 @@ const MovieDetails = () => {
     const data = await fetch(`${GET_MOVIE_API}&i=${query}`);
     const json = await data.json();
     setDetails(json);
+     setLoading(false);
   }, [query]);
 
   useEffect(() => {
