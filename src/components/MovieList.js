@@ -4,7 +4,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { GET_MOVIE_API } from "../utils/constant";
 import MovieCard from "./MovieCard";
 import { Link } from "react-router-dom";
-import Err from './Err';
+
 import { useNavigate } from "react-router-dom";
 const MovieList = () => {
   const [movielist, setmovielist] = useState([]);
