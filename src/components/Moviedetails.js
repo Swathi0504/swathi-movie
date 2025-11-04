@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback  } from "react";
 import { useSearchParams } from "react-router-dom";
 import { GET_MOVIE_API } from "../utils/constant";
 
@@ -8,21 +8,15 @@ const MovieDetails = () => {
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+   useEffect(() => {
     getDetails();
-  }, []);
+  }, [getDetails]);
 
-  const getDetails = async () => {
-    try {
-      const data = await fetch(`${GET_MOVIE_API}&i=${query}`);
-      const json = await data.json();
-      setDetails(json);
-    } catch (error) {
-      console.error("Error fetching details:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const getDetails = useCallback(async () => {
+    const data = await fetch(`${GET_MOVIE_API}&i=${query}`);
+    const json = await data.json();
+    setDetails(json);
+  }, [query]);
 
   if (loading) {
     return (

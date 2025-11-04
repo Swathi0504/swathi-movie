@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback  } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { GET_MOVIE_API } from "../utils/constant";
@@ -14,11 +14,11 @@ const MovieList = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate(); 
 
-  useEffect(() => {
+   useEffect(() => {
     getMovielist(lastQuery, filter);
-  }, [filter]);
+  }, [getMovielist, lastQuery, filter]);
 
-  const getMovielist = async (search, type = filter) => {
+  const getMovielist = useCallback(async (search, type = filter) => {
     const searchquery = search || "Harry";
     let url = `${GET_MOVIE_API}&s=${searchquery}`;
     if (type) url += `&type=${type}`;
@@ -30,7 +30,7 @@ const MovieList = () => {
     } catch (error) {
       console.error("Error fetching movies:", error);
     }
-  };
+  }, [filter]);
 
   const handleSearch = (e) => {
     e.preventDefault();
