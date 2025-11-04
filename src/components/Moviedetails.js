@@ -8,15 +8,17 @@ const MovieDetails = () => {
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
 
-   useEffect(() => {
-    getDetails();
-  }, [getDetails]);
+   
 
   const getDetails = useCallback(async () => {
     const data = await fetch(`${GET_MOVIE_API}&i=${query}`);
     const json = await data.json();
     setDetails(json);
   }, [query]);
+
+  useEffect(() => {
+    getDetails();
+  }, [getDetails]);
 
   if (loading) {
     return (

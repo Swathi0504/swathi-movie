@@ -14,9 +14,6 @@ const MovieList = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate(); 
 
-   useEffect(() => {
-    getMovielist(lastQuery, filter);
-  }, [getMovielist, lastQuery, filter]);
 
   const getMovielist = useCallback(async (search, type = filter) => {
     const searchquery = search || "Harry";
@@ -31,6 +28,10 @@ const MovieList = () => {
       console.error("Error fetching movies:", error);
     }
   }, [filter]);
+
+   useEffect(() => {
+    getMovielist(lastQuery, filter);
+  }, [getMovielist, lastQuery, filter]);
 
   const handleSearch = (e) => {
     e.preventDefault();
