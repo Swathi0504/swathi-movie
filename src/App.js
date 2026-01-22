@@ -7,7 +7,7 @@ import Moviedetails from './components/Moviedetails';
 import Err from './components/Err';
 
 
-
+ 
 function App() {
 
   const appRouter = createBrowserRouter([{
